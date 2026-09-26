@@ -1,0 +1,17 @@
+AP-STAFF
+SSID: Kgosi-Staff
+Security: WPA2-PSK
+Encryption: AES
+Key: KgosiStaff@2026
+Switch port: SW1 Fa0/2
+VLAN: 20
+
+AP-GUEST
+SSID: Kgosi-Guest
+Security: WPA2-PSK
+Encryption: AES
+Key: KgosiGuest@2026
+Switch port: SW1 Fa0/3
+VLAN: 50
+
+Guest isolation is enforced by the GUEST-ISOLATION ACL on Kgosi-R1.

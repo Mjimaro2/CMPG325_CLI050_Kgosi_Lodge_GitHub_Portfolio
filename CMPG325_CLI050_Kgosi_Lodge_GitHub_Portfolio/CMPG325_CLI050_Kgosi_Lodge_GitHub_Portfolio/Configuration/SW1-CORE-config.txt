@@ -1,0 +1,39 @@
+hostname SW1-CORE
+vlan 10
+ name MANAGEMENT
+vlan 20
+ name STAFF
+vlan 30
+ name SERVERS
+vlan 40
+ name IOT
+vlan 50
+ name GUEST
+vlan 99
+ name NET-MGMT
+vlan 999
+ name UNUSED
+interface g0/1
+ switchport mode trunk
+ switchport trunk native vlan 999
+ switchport trunk allowed vlan 10,20,30,40,50,99
+interface g0/2
+ switchport mode trunk
+ switchport trunk native vlan 999
+ switchport trunk allowed vlan 10,20,30,40,50,99
+interface fa0/1
+ switchport mode access
+ switchport access vlan 30
+ spanning-tree portfast
+interface fa0/2
+ switchport mode access
+ switchport access vlan 20
+ spanning-tree portfast
+interface fa0/3
+ switchport mode access
+ switchport access vlan 50
+ spanning-tree portfast
+interface vlan 99
+ ip address 172.30.25.2 255.255.255.224
+ no shutdown
+ip default-gateway 172.30.25.1

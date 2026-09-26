@@ -1,0 +1,71 @@
+hostname Kgosi-R1
+no ip domain-lookup
+enable secret KgosiEnable123
+service password-encryption
+interface g0/0
+ no shutdown
+interface g0/0.10
+ encapsulation dot1Q 10
+ ip address 172.30.24.1 255.255.255.192
+ ip nat inside
+interface g0/0.20
+ encapsulation dot1Q 20
+ ip address 172.30.24.65 255.255.255.192
+ ip nat inside
+interface g0/0.30
+ encapsulation dot1Q 30
+ ip address 172.30.24.129 255.255.255.224
+ ip nat inside
+interface g0/0.40
+ encapsulation dot1Q 40
+ ip address 172.30.24.161 255.255.255.224
+ ip nat inside
+interface g0/0.50
+ encapsulation dot1Q 50
+ ip address 172.30.24.193 255.255.255.192
+ ip nat inside
+ ip access-group GUEST-ISOLATION in
+interface g0/0.99
+ encapsulation dot1Q 99
+ ip address 172.30.25.1 255.255.255.224
+ ip nat inside
+interface g0/1
+ ip address 203.0.113.2 255.255.255.252
+ ip nat outside
+ no shutdown
+ip route 0.0.0.0 0.0.0.0 203.0.113.1
+ip dhcp excluded-address 172.30.24.1 172.30.24.10
+ip dhcp excluded-address 172.30.24.65 172.30.24.74
+ip dhcp excluded-address 172.30.24.129 172.30.24.135
+ip dhcp excluded-address 172.30.24.161 172.30.24.170
+ip dhcp excluded-address 172.30.24.193 172.30.24.200
+ip dhcp pool MANAGEMENT
+ network 172.30.24.0 255.255.255.192
+ default-router 172.30.24.1
+ dns-server 172.30.24.130
+ip dhcp pool STAFF
+ network 172.30.24.64 255.255.255.192
+ default-router 172.30.24.65
+ dns-server 172.30.24.130
+ip dhcp pool IOT
+ network 172.30.24.160 255.255.255.224
+ default-router 172.30.24.161
+ dns-server 172.30.24.130
+ip dhcp pool GUEST
+ network 172.30.24.192 255.255.255.192
+ default-router 172.30.24.193
+ dns-server 172.30.24.130
+access-list 1 permit 172.30.24.0 0.0.1.255
+ip nat inside source list 1 interface g0/1 overload
+ip access-list extended GUEST-ISOLATION
+ deny ip 172.30.24.192 0.0.0.63 172.30.24.0 0.0.0.63
+ deny ip 172.30.24.192 0.0.0.63 172.30.24.64 0.0.0.63
+ deny ip 172.30.24.192 0.0.0.63 172.30.24.128 0.0.0.31
+ deny ip 172.30.24.192 0.0.0.63 172.30.24.160 0.0.0.31
+ deny ip 172.30.24.192 0.0.0.63 172.30.25.0 0.0.0.31
+ permit ip 172.30.24.192 0.0.0.63 any
+ip domain-name kgosilodge.local
+username admin privilege 15 secret KgosiAdmin123
+line vty 0 4
+ login local
+ transport input ssh

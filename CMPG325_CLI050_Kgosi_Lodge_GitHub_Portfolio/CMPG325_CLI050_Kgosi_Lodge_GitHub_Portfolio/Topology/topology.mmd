@@ -1,0 +1,13 @@
+flowchart TD
+ Internet --> ISP["ISP-R1"]
+ ISP --> R1["Kgosi-R1"]
+ R1 -->|802.1Q trunk| SW1["SW1-CORE"]
+ SW1 -->|802.1Q trunk| SW2["SW2-ACCESS"]
+ SW1 --> Server["WEB-DNS-SERVER VLAN 30"]
+ SW1 --> AP1["AP-STAFF VLAN 20"]
+ SW1 --> AP2["AP-GUEST VLAN 50"]
+ SW2 --> Staff["Staff VLAN 20"]
+ SW2 --> Mgmt["Management VLAN 10"]
+ SW2 --> IoT["IoT VLAN 40"]
+ AP1 --> StaffWiFi["Staff Wi-Fi"]
+ AP2 --> GuestWiFi["Guest Wi-Fi"]
