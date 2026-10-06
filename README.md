@@ -168,15 +168,7 @@ Recommended names:
 09-dns-test.png
 10-internet-test.png
 11-nat-translations.png
-12-guest-ip-address.png
-13-guest-internal-blocked.png
-14-guest-internet-success.png
-15-guest-acl.png
-16-staff-wpa2.png
-17-guest-wpa2.png
-18-ssh-login.png
-19-routing-table.png
-```
+
 
 ## Repository Structure
 
@@ -203,9 +195,6 @@ CMPG325_CLI050_Kgosi_Lodge_GitHub_Portfolio/
     └── Demonstration-Script.md
 ```
 
-## Academic Integrity
-
-The final `.pkt`, screenshots, testing results and reflection should come from the student's own Packet Tracer implementation. Do not submit another student's configuration or evidence as your own.
 
 ## Author
 
